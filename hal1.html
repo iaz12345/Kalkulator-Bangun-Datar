@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Bangun Datar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f4f1e1;
+            color: #5d4e46;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #d1a15e;
+            padding: 15px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #c2976a;
+            position: sticky;
+            top: 0;
+        }
+
+        header .logo {
+            font-size: 2rem; /* Responsif ukuran font logo */
+            font-weight: bold;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem; /* Responsif ukuran font */
+            margin-bottom: 20px;
+            color: #3a2c1b;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .calculator-form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .form-group input, select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .start-button {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #d1a15e;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin: 20px auto;
+        }
+
+        .start-button:hover {
+            background-color: #a6824d;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #3a2c1b;
+        }
+
+        /* Media Queries untuk Responsif pada layar kecil */
+        @media (max-width: 768px) {
+            header .logo {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .start-button {
+                font-size: 1rem;
+                padding: 10px;
+                max-width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin-top: 30px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+            .start-button {
+                font-size: 1rem;
+                padding: 10px;
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Kalkulator Bangun Datar</a>
+    </header>
+
+    <div class="container">
+        <h1>Selamat Datang!</h1>
+        <p>Silakan pilih bangun datar dan masukkan nilai untuk menghitung luasnya.</p>
+
+        <div class="calculator-form">
+            <div class="form-group">
+                <label for="shape">Pilih Bangun Datar:</label>
+                <select id="shape" onchange="updateForm()">
+                    <option value="persegi">Persegi</option>
+                    <option value="persegiPanjang">Persegi Panjang</option>
+                    <option value="lingkaran">Lingkaran</option>
+                    <option value="segitiga">Segitiga</option>
+                    <option value="jajarGenjang">Jajar Genjang</option>
+                    <option value="trapesium">Trapesium</option>
+                    <option value="belahKetupat">Belah Ketupat</option>
+                    <option value="layangLayang">Layang-layang</option>
+                </select>
+            </div>
+
+            <div id="formFields">
+                <!-- Kolom input akan muncul berdasarkan pilihan bangun datar -->
+            </div>
+
+            <div id="result" class="result"></div>
+
+            <a href="#" class="start-button" onclick="calculate()">Hitung Luas</a>
+        </div>
+    </div>
+
+    <script>
+        function updateForm() {
+            const shape = document.getElementById('shape').value;
+            const formFields = document.getElementById('formFields');
+            formFields.innerHTML = ''; // Reset fields
+
+            let fieldsHTML = '';
+            if (shape === 'persegi') {
+                fieldsHTML = `
+                    <div class="form-group">
+                        <label for="sisi">Sisi:</label>
+                        <input type="number" id="sisi" placeholder="Masukkan panjang sisi" required>
+                    </div>`;
+            } else if (shape === 'persegiPanjang') {
+                fieldsHTML = `
+                    <div class="form-group">
+                        <label for="panjang">Panjang:</label>
+                        <input type="number" id="panjang" placeholder="Masukkan panjang" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lebar">Lebar:</label>
+                        <input type="number" id="lebar" placeholder="Masukkan lebar" required>
+                    </div>`;
+            } else if (shape === 'lingkaran') {
+                fieldsHTML = `
+                    <div class="form-group">
+                        <label for="radius">Radius:</label>
+                        <input type="number" id="radius" placeholder="Masukkan radius" required>
+                    </div>`;
+            } else if (shape === 'segitiga') {
+                fieldsHTML = `
+                    <div class="form-group">
+                        <label for="alas">Alas:</label>
+                        <input type="number" id="alas" placeholder="Masukkan panjang alas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tinggi">Tinggi:</label>
+                        <input type="number" id="tinggi" placeholder="Masukkan tinggi" required>
+                    </div>`;
+            } else if (shape === 'jajarGenjang') {
+                fieldsHTML = `
+                    <div class="form-group">
+                        <label for="alas">Alas:</label>
+                        <input type="number" id="alas" placeholder="Masukkan panjang alas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tinggi">Tinggi:</label>
+                        <input type="number" id="tinggi" placeholder="Masukkan tinggi" required>
+                    </div>`;
+            } else if (shape === 'trapesium') {
+                fieldsHTML = `
+                    <div class="form-group">
+                        <label for="sisiA">Sisi A:</label>
+                        <input type="number" id="sisiA" placeholder="Masukkan panjang sisi A" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sisiB">Sisi B:</label>
+                        <input type="number" id="sisiB" placeholder="Masukkan panjang sisi B" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tinggi">Tinggi:</label>
+                        <input type="number" id="tinggi" placeholder="Masukkan tinggi" required>
+                    </div>`;
+            } else if (shape === 'belahKetupat' || shape === 'layangLayang') {
+                fieldsHTML = `
+                    <div class="form-group">
+                        <label for="diagonal1">Diagonal 1:</label>
+                        <input type="number" id="diagonal1" placeholder="Masukkan panjang diagonal 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="diagonal2">Diagonal 2:</label>
+                        <input type="number" id="diagonal2" placeholder="Masukkan panjang diagonal 2" required>
+                    </div>`;
+            }
+
+            formFields.innerHTML = fieldsHTML;
+        }
+
+        function calculate() {
+            const shape = document.getElementById('shape').value;
+            let result = 0;
+
+            if (shape === 'persegi') {
+                const sisi = parseFloat(document.getElementById('sisi').value);
+                result = sisi * sisi;
+            } else if (shape === 'persegiPanjang') {
+                const panjang = parseFloat(document.getElementById('panjang').value);
+                const lebar = parseFloat(document.getElementById('lebar').value);
+                result = panjang * lebar;
+            } else if (shape === 'lingkaran') {
+                const radius = parseFloat(document.getElementById('radius').value);
+                result = Math.PI * Math.pow(radius, 2);
+            } else if (shape === 'segitiga') {
+                const alas = parseFloat(document.getElementById('alas').value);
+                const tinggi = parseFloat(document.getElementById('tinggi').value);
+                result = 0.5 * alas * tinggi;
+            } else if (shape === 'jajarGenjang') {
+                const alas = parseFloat(document.getElementById('alas').value);
+                const tinggi = parseFloat(document.getElementById('tinggi').value);
+                result = alas * tinggi;
+            } else if (shape === 'trapesium') {
+                const sisiA = parseFloat(document.getElementById('sisiA').value);
+                const sisiB = parseFloat(document.getElementById('sisiB').value);
+                const tinggi = parseFloat(document.getElementById('tinggi').value);
+                result = 0.5 * (sisiA + sisiB) * tinggi;
+            } else if (shape === 'belahKetupat' || shape === 'layangLayang') {
+                const diagonal1 = parseFloat(document.getElementById('diagonal1').value);
+                const diagonal2 = parseFloat(document.getElementById('diagonal2').value);
+                result = 0.5 * diagonal1 * diagonal2;
+            }
+
+            document.getElementById('result').textContent = `Luas ${shape} adalah: ${result.toFixed(2)} unit²`;
+        }
+
+        // Inisialisasi form dengan bangun datar pertama
+        updateForm();
+    </script>
+</body>
+</html>

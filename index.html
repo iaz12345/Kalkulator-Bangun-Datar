@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Datang di Kalkulator Bangun Datar</title>
+    <style>
+        /* Reset beberapa style default */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f4f1e1;
+            color: #5d4e46;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            background-color: #d1a15e;
+            padding: 15px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #c2976a;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        header .logo {
+            font-size: 2.5em; /* Menggunakan ukuran relatif */
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .container {
+            width: 90%; /* Membuat lebar container fleksibel */
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 100px; 
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em; /* Menyesuaikan ukuran h1 */
+            margin-bottom: 20px;
+            color: #3a2c1b;
+        }
+
+        p {
+            font-size: 1.1em; /* Menyesuaikan ukuran teks agar lebih fleksibel */
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .start-button {
+            display: inline-block;
+            width: 100%;
+            max-width: 250px; /* Membatasi lebar tombol */
+            padding: 15px;
+            background-color: #d1a15e;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 1.2em; /* Menyesuaikan ukuran font */
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 30px;
+        }
+
+        .start-button:hover {
+            background-color: #a6824d;
+        }
+
+        /* Media Queries untuk responsif pada perangkat kecil */
+        @media (max-width: 600px) {
+            header .logo {
+                font-size: 2em; /* Ukuran font logo lebih kecil */
+            }
+
+            .container {
+                padding: 15px;
+                margin-top: 80px; /* Mengurangi margin atas untuk perangkat kecil */
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em; /* Menyesuaikan ukuran teks */
+            }
+
+            .start-button {
+                font-size: 1em;
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                margin-top: 60px; /* Mengurangi jarak lebih lanjut pada layar kecil */
+            }
+
+            .start-button {
+                width: 100%; /* Membuat tombol lebih besar di layar kecil */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Kalkulator Bangun Datar</div>
+    </header>
+
+    <div class="container">
+        <h1>Selamat Datang!</h1>
+        <p>Ini adalah Kalkulator Bangun Datar, alat yang dirancang untuk membantu Anda menghitung luas dari berbagai bangun datar. Di sini, Anda bisa menghitung luas dari bangun-bangun seperti persegi, persegi panjang, segitiga, dan lingkaran dengan mudah dan cepat.</p>
+
+        <p>Bangun datar adalah bangun yang memiliki dua dimensi, yaitu panjang dan lebar (atau radius). Kalkulator ini akan membantu Anda memahami lebih dalam tentang setiap bangun dan memberikan hasil yang akurat sesuai dengan input yang Anda berikan.</p>
+
+        <p>Siap untuk menghitung? Klik tombol di bawah untuk mulai menghitung luas bangun datar yang Anda inginkan!</p>
+    </div>
+
+    <a href="hal1.html" class="start-button">Mulai Kalkulator</a>
+
+</body>
+</html>
